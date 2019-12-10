@@ -48,10 +48,7 @@ namespace Server
         {
             txt_port.Text = "2203";
             txt_ip.Text =LocalIPAddress().ToString();
-            serverSocket.Bind(new IPEndPoint(LocalIPAddress(), int.Parse(txt_port.Text)));
-            serverSocket.Listen(1);
-            serverSocket.BeginAccept(new AsyncCallback(AppceptCallback), null);
-
+            
             timer1.Tick += Timer1_Tick;
             timer1.Start();
             
@@ -169,6 +166,11 @@ namespace Server
             }
         }
 
-
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            serverSocket.Bind(new IPEndPoint(LocalIPAddress(), int.Parse(txt_port.Text)));
+            serverSocket.Listen(1);
+            serverSocket.BeginAccept(new AsyncCallback(AppceptCallback), null);
+        }
     }
 }
